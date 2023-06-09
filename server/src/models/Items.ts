@@ -13,30 +13,30 @@ export class Items extends Model {
 	@Column({
 		type: DataType.STRING,
 	})
-	itemNo!: string;
+	ItemNo!: string;
+
+	@Column({
+		type: DataType.STRING(1000),
+	})
+	Description!: string;
 
 	@Column({
 		type: DataType.STRING,
 	})
-	description!: string;
+	Unit!: string;
 
 	@Column({
 		type: DataType.STRING,
 	})
-	unit!: string;
+	Qty!: string;
 
 	@Column({
-		type: DataType.FLOAT,
+		type: DataType.STRING,
 	})
-	quantity!: string;
+	Rate!: string;
 
 	@Column({
-		type: DataType.FLOAT,
+		type: DataType.STRING,
 	})
-	rate!: string;
-
-	@Column({
-		type: DataType.FLOAT,
-	})
-	amount!: string;
+	Amount!: string;
 }

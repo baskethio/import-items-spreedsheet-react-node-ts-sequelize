@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { read, utils } from "xlsx";
 import "./App.css";
+import axios from "axios";
 
 function App() {
 	const [__html, setHtml] = useState("");
@@ -29,6 +30,7 @@ function App() {
 					range:
 						parseInt(utils.sheet_to_formulae(worksheet)[0].split("=")[0][1]) -
 						1,
+					blankrows: false,
 				})
 				.map((row: any) =>
 					Object.keys(row).reduce((obj: any, key) => {
@@ -41,7 +43,16 @@ function App() {
 				parseInt(utils.sheet_to_formulae(worksheet)[0].split("=")[0][1]) - 1
 			);
 			console.log(data);
+			storeData(data);
 		}
+	};
+	const storeData = (data: any) => {
+		axios
+			.post("http://localhost:5000/items/bulk", data)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => console.error(error));
 	};
 	return (
 		<>

@@ -8,6 +8,7 @@ import connection from "./db/config";
 const itemRoutes = require("./routes/items");
 
 app.use(cors());
+app.use(express.json());
 
 app.use("/items", itemRoutes);
 
