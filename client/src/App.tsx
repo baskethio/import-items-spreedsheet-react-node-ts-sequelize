@@ -24,9 +24,23 @@ function App() {
 			const f = e.target.result;
 			const workbook = read(f);
 			const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-			const data = utils.sheet_to_csv(worksheet);
+			const data = utils
+				.sheet_to_json(worksheet, {
+					range:
+						parseInt(utils.sheet_to_formulae(worksheet)[0].split("=")[0][1]) -
+						1,
+				})
+				.map((row: any) =>
+					Object.keys(row).reduce((obj: any, key) => {
+						obj[key.trim()] = row[key];
+						return obj;
+					}, {})
+				);
 			setHtml(utils.sheet_to_html(worksheet));
-			// console.log(data);
+			console.log(
+				parseInt(utils.sheet_to_formulae(worksheet)[0].split("=")[0][1]) - 1
+			);
+			console.log(data);
 		}
 	};
 	return (
