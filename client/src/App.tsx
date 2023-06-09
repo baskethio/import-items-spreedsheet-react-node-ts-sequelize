@@ -26,7 +26,7 @@ function App() {
 			const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 			const data = utils.sheet_to_csv(worksheet);
 			setHtml(utils.sheet_to_html(worksheet));
-			console.log(data);
+			// console.log(data);
 		}
 	};
 	return (

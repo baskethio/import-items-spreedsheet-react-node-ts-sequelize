@@ -4,3 +4,25 @@
 	padding: 2rem;
 	text-align: center;
 }
+
+table,
+td {
+	border: 1px solid;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid;
+	margin-top: 12px;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #eee;
+}
+tbody tr:nth-child(2) {
+	background-color: #ec9c66ef;
+}
