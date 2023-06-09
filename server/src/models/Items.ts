@@ -1,3 +1,4 @@
+import { UUIDV4 } from "sequelize";
 import { Table, Model, Column, DataType } from "sequelize-typescript";
 
 @Table({
@@ -7,6 +8,9 @@ import { Table, Model, Column, DataType } from "sequelize-typescript";
 export class Items extends Model {
 	@Column({
 		type: DataType.UUID,
+		defaultValue: UUIDV4,
+		allowNull: false,
+		primaryKey: true,
 	})
 	itemId!: string;
 
