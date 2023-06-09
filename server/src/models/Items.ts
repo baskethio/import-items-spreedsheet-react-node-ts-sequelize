@@ -12,7 +12,7 @@ export class Items extends Model {
 		allowNull: false,
 		primaryKey: true,
 	})
-	itemId!: string;
+	id!: string;
 
 	@Column({
 		type: DataType.STRING,

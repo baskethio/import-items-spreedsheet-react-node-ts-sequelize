@@ -23,10 +23,15 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
 	background-color: #eee;
 }
-tbody tr:nth-child(2) {
+
+.parsed-table tbody tr:nth-child(2) {
 	background-color: #ec9c66ef;
 }
 
 tbody tr:not(:nth-child(2)):hover {
 	background-color: #ddd;
+}
+
+.response-table thead tr {
+	background-color: #ec9c66ef;
 }

@@ -35,6 +35,7 @@ export const bulkInsert: RequestHandler = async (req, res, next) => {
 			Amount: item.Amount,
 		};
 	});
+	const deleted = await Items.truncate();
 	const items = await Items.bulkCreate(req.body);
 	return res.json({ message: "item created", data: items });
 };
