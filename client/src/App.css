@@ -24,7 +24,7 @@ tbody tr:nth-child(even) {
 	background-color: #eee;
 }
 
-.parsed-table tbody tr:nth-child(2) {
+.table-parsed tbody tr:nth-child(2) {
 	background-color: #ec9c66ef;
 }
 
@@ -32,6 +32,6 @@ tbody tr:not(:nth-child(2)):hover {
 	background-color: #ddd;
 }
 
-.response-table thead tr {
+.table-response thead tr {
 	background-color: #ec9c66ef;
 }

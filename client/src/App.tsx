@@ -66,6 +66,9 @@ function App() {
 			})
 			.catch((error) => console.error(error));
 	};
+	const parse = (value: string) =>
+		Number.isNaN(parseFloat(value)) ? "" : parseFloat(value).toFixed(2);
+
 	useEffect(fetchItems, []);
 	return (
 		<>
@@ -94,14 +97,14 @@ function App() {
 							<td>{item.ItemNo}</td>
 							<td>{item.Description}</td>
 							<td>{item.Unit}</td>
-							<td>{parseFloat(item.Qty).toFixed(2)}</td>
+							<td>{parse(item.Qty)}</td>
 							<td>{item.Rate}</td>
-							<td>{parseFloat(item.Amount).toFixed(2)}</td>
+							<td>{parse(item.Amount)}</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<div className="parsed-table" dangerouslySetInnerHTML={{ __html }} />
+			<div className="table-parsed" dangerouslySetInnerHTML={{ __html }} />
 		</>
 	);
 }
