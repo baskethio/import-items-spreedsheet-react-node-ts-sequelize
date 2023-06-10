@@ -80,7 +80,6 @@ function App() {
 				console.log(response.data);
 				fetchItems();
 				setOpened(false);
-				setOpened(false);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -88,7 +87,18 @@ function App() {
 			});
 	};
 
-	const deleteItem = () => {};
+	const deleteItem = (item: Item) => {
+		axios
+			.delete(`http://localhost:5000/items/${item.id}`)
+			.then((response) => {
+				console.log(response.data);
+				fetchItems();
+			})
+			.catch((error) => {
+				console.error(error);
+				setOpened(false);
+			});
+	};
 
 	const parse = (value: string) =>
 		Number.isNaN(parseFloat(value)) ? "" : parseFloat(value).toFixed(2);
@@ -135,7 +145,11 @@ function App() {
 										}}>
 										edit
 									</span>
-									<span className="action-button delete" onClick={deleteItem}>
+									<span
+										className="action-button delete"
+										onClick={() => {
+											deleteItem(item);
+										}}>
 										delete
 									</span>
 								</td>

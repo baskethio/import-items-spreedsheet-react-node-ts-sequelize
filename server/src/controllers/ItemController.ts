@@ -9,10 +9,8 @@ export const createItem: RequestHandler = async (req, res, next) => {
 };
 
 export const editItem: RequestHandler = async (req, res, next) => {
-	const items = await Items.update(
-		{ ...req.body },
-		{ where: { id: req.body.id } }
-	);
+	const { id } = req.params;
+	const items = await Items.update({ ...req.body }, { where: { id } });
 	return res.json({ message: "item edited", data: items });
 };
 
@@ -23,6 +21,7 @@ export const getAllItems: RequestHandler = async (req, res, next) => {
 
 export const deleteItem: RequestHandler = async (req, res, next) => {
 	const { id } = req.params;
+	console.log(req.params);
 	const items = await Items.findByPk(id);
 	await Items.destroy({ where: { id } });
 	return res.status(200).json(items);
