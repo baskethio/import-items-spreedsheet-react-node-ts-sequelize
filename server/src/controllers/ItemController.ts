@@ -8,6 +8,14 @@ export const createItem: RequestHandler = async (req, res, next) => {
 	return res.json({ message: "item created", data: items });
 };
 
+export const editItem: RequestHandler = async (req, res, next) => {
+	const items = await Items.update(
+		{ ...req.body },
+		{ where: { id: req.body.id } }
+	);
+	return res.json({ message: "item edited", data: items });
+};
+
 export const getAllItems: RequestHandler = async (req, res, next) => {
 	const items = await Items.findAll();
 	return res.json(items);

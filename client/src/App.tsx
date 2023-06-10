@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { read, utils } from "xlsx";
 import "./App.css";
 import axios from "axios";
+import { Button, Center, Modal, TextInput } from "@mantine/core";
 
 function App() {
 	const [__html, setHtml] = useState("");
@@ -15,6 +16,8 @@ function App() {
 		Amount: string;
 	}
 	const [items, setItems] = useState<Item[]>([]);
+	const [opened, setOpened] = useState(false);
+	const [item, setItem] = useState({} as Item);
 
 	const reader = new FileReader();
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +69,27 @@ function App() {
 			})
 			.catch((error) => console.error(error));
 	};
+
+	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setItem({ ...item, [event.target.name]: event.target.value });
+	};
+	const editItem = () => {
+		axios
+			.patch(`http://localhost:5000/items/${item.id}`, item)
+			.then((response) => {
+				console.log(response.data);
+				fetchItems();
+				setOpened(false);
+				setOpened(false);
+			})
+			.catch((error) => {
+				console.error(error);
+				setOpened(false);
+			});
+	};
+
+	const deleteItem = () => {};
+
 	const parse = (value: string) =>
 		Number.isNaN(parseFloat(value)) ? "" : parseFloat(value).toFixed(2);
 
@@ -80,36 +104,88 @@ function App() {
 				id="file"
 				accept="xls"
 			/>
-			<table className="table-response">
-				<thead>
-					<tr>
-						<td>ItemNo</td>
-						<td>Description</td>
-						<td>Unit</td>
-						<td>Qty</td>
-						<td>Rate</td>
-						<td>Amount</td>
-						<td className="actions">Actions</td>
-					</tr>
-				</thead>
-				<tbody>
-					{items.map((item) => (
+			{items.length > 0 && (
+				<table className="table-response">
+					<thead>
 						<tr>
-							<td>{item.ItemNo}</td>
-							<td>{item.Description}</td>
-							<td>{item.Unit}</td>
-							<td>{parse(item.Qty)}</td>
-							<td>{item.Rate}</td>
-							<td>{parse(item.Amount)}</td>
-							<td className="actions">
-								<span className="action-button edit">edit</span>
-								<span className="action-button delete">delete</span>
-							</td>
+							<td>ItemNo</td>
+							<td>Description</td>
+							<td>Unit</td>
+							<td>Qty</td>
+							<td>Rate</td>
+							<td>Amount</td>
+							<td className="actions">Actions</td>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{items.map((item) => (
+							<tr key={item.id}>
+								<td>{item.ItemNo}</td>
+								<td>{item.Description}</td>
+								<td>{item.Unit}</td>
+								<td>{parse(item.Qty)}</td>
+								<td>{item.Rate}</td>
+								<td>{parse(item.Amount)}</td>
+								<td className="actions">
+									<span
+										className="action-button edit"
+										onClick={() => {
+											setOpened(true);
+											setItem(item);
+										}}>
+										edit
+									</span>
+									<span className="action-button delete" onClick={deleteItem}>
+										delete
+									</span>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)}
 			<div className="table-parsed" dangerouslySetInnerHTML={{ __html }} />
+			<Modal opened={opened} title="Edit Item" onClose={() => setOpened(false)}>
+				<TextInput
+					label="ItemNo"
+					name="ItemNo"
+					value={item.ItemNo}
+					onChange={handleInputChange}
+				/>
+				<TextInput
+					label="Description"
+					name="Description"
+					value={item.Description}
+					onChange={handleInputChange}
+				/>
+				<TextInput
+					label="Unit"
+					name="Unit"
+					value={item.Unit}
+					onChange={handleInputChange}
+				/>
+				<TextInput
+					label="Qty"
+					name="Qty"
+					value={item.Qty}
+					onChange={handleInputChange}
+				/>
+				<TextInput
+					label="Rate"
+					name="Rate"
+					value={item.Rate}
+					onChange={handleInputChange}
+				/>
+				<TextInput
+					label="Amount"
+					name="Amount"
+					value={item.Amount}
+					onChange={handleInputChange}
+				/>
+				<Center mt={5}>
+					<Button onClick={editItem}>Save</Button>
+				</Center>
+			</Modal>
 		</>
 	);
 }
