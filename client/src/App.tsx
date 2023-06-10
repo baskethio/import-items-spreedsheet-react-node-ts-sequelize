@@ -89,6 +89,7 @@ function App() {
 						<td>Qty</td>
 						<td>Rate</td>
 						<td>Amount</td>
+						<td className="actions">Actions</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -100,6 +101,10 @@ function App() {
 							<td>{parse(item.Qty)}</td>
 							<td>{item.Rate}</td>
 							<td>{parse(item.Amount)}</td>
+							<td className="actions">
+								<span className="action-button edit">edit</span>
+								<span className="action-button delete">delete</span>
+							</td>
 						</tr>
 					))}
 				</tbody>

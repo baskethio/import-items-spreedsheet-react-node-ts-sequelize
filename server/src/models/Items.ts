@@ -1,5 +1,12 @@
 import { UUIDV4 } from "sequelize";
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import {
+	Table,
+	Model,
+	Column,
+	DataType,
+	CreatedAt,
+	UpdatedAt,
+} from "sequelize-typescript";
 
 @Table({
 	timestamps: false,
@@ -43,4 +50,10 @@ export class Items extends Model {
 		type: DataType.STRING,
 	})
 	Amount!: string;
+
+	@CreatedAt
+	creationDate!: Date;
+
+	@UpdatedAt
+	updatedOn!: Date;
 }

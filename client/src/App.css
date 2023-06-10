@@ -35,3 +35,30 @@ tbody tr:not(:nth-child(2)):hover {
 .table-response thead tr {
 	background-color: #ec9c66ef;
 }
+
+.action-button {
+	cursor: pointer;
+	margin-left: 12px;
+	border: 1px solid #ccc;
+	padding: 2px 12px;
+	border-radius: 5px;
+}
+.action-button:hover {
+	background-color: #fff;
+}
+
+.action-button.edit {
+	color: #f8ce5bef;
+}
+
+.action-button.delete {
+	color: #f84803ef;
+}
+
+.actions {
+	padding: 7px;
+}
+
+thead tr td {
+	padding: 3px 7px;
+}
