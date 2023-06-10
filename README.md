@@ -5,17 +5,17 @@
 - run
 
 ```
-  > cd server
-  > yarn
-  > yarn dev
+  cd server
+  yarn
+  yarn dev
 ```
 
 - and
 
 ```
-  > cd client
-  > yarn
-  > yarn dev
+  cd client
+  yarn
+  yarn dev
 ```
 
 ### Screenshots
