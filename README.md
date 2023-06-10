@@ -1,4 +1,4 @@
 ### Screenshots
 
-![Screenshoot Desktop](./screenshots/1.png)
-![Screenshoot Mobile](./screenshoots/2.png)
+![Screenshoot Table](./screenshots/1.png)
+![Screenshoot Edit](./screenshots/2.png)
